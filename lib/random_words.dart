@@ -38,7 +38,8 @@ class RandomWordsState extends State<RandomWords> {
           return ListTile(
             title: Text(pair.asPascalCase,
             style: const TextStyle(
-              fontSize: 16.0
+              fontSize: 16.0,
+              fontWeight: FontWeight.w900
             )),
           );
         });
@@ -50,6 +51,7 @@ class RandomWordsState extends State<RandomWords> {
           return Scaffold(
             appBar: AppBar(
               title: const Text("Saved WordPair"),
+              backgroundColor: Colors.purpleAccent,
             ),
             body: ListView(children: divided),
           );
