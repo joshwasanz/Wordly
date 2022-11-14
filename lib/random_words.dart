@@ -51,7 +51,7 @@ class RandomWordsState extends State<RandomWords> {
           return Scaffold(
             appBar: AppBar(
               title: const Text("Saved WordPair"),
-              backgroundColor: Colors.purpleAccent,
+              backgroundColor: Colors.purple[800],
             ),
             body: ListView(children: divided),
           );
