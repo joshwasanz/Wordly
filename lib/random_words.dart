@@ -2,43 +2,40 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
  
 
+class RandomWords extends StatefulWidget {
+  const RandomWords({super.key});
 
-class RandomWords extends StatefulWidget{
   @override
-  RandomWordsState createState()=> RandomWordsState();
+  State<RandomWords> createState() => RandomWordsState();
 }
 
-class RandomWordsState extends State<RandomWords>{
+class RandomWordsState extends State<RandomWords> {
   final _randomWordPairs = <WordPair>[];
   final _savedWordPairs = Set<WordPair>();
 
-   _buildList(){
-    return ListView.builder(
-  padding:  EdgeInsets.all(16.0),
-  itemBuilder: (context, item) {
-    if (item.isOdd) return Divider();
+  _buildList(){
+    return ListView.builder(itemBuilder: (context,item){
+      if (item.isOdd) return Divider();
 
-    final index = item ~/ 2;
+      final index = item ~/ 2;
 
-    if(index >= _randomWordPairs.length){
-      _randomWordPairs.addAll(generateWordPairs().take(10));
-    }
-    return _buildRow(_randomWordPairs[index]);
-  },
-);
-}
+      if(item >= _randomWordPairs.length){
+        _randomWordPairs.addAll(generateWordPairs().take(10));
+      }
+      return _buildRow(_randomWordPairs[index]);
+    });
+  }
+  
+  _buildRow(WordPair pair){
+    final alreadySaved = _savedWordPairs.contains(pair);
 
-Widget _buildRow(WordPair pair){
-  final alreadySaved = _savedWordPairs.contains(pair);
-
-
-  return ListTile(
-    title: Text(pair.asPascalCase,
+    return ListTile(
+    title: Text(pair.asCamelCase, 
     style: TextStyle(
       fontSize: 18.0
     ),),
     trailing: Icon(alreadySaved ? Icons.favorite : Icons.favorite_border, 
-    color: alreadySaved? Colors.amber : null),
+    color: alreadySaved? Colors.red[500] : null),
     onTap: (){
       setState(() {
         if(alreadySaved){
@@ -49,15 +46,19 @@ Widget _buildRow(WordPair pair){
       });
     },
   );
-}
+  }
 
- Widget build(BuildContext context){
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text("Word Pair Generator"),
-        backgroundColor: Colors.purple[900],
+        title: Text("Word Pair"),
+        backgroundColor: Colors.purple[800],
       ),
       body: _buildList(),
     );
   }
-}
+  }
+    
+  
+
+
