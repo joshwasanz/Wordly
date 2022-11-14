@@ -7,8 +7,7 @@ class MyApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    // var wordPair = WordPair.random();
-    return MaterialApp(
+    return const MaterialApp(
       home: RandomWords()
     );
   }
